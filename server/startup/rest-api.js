@@ -1,4 +1,5 @@
 import { Accounts, Cart, Emails, Orders, Products, Shops } from "/lib/collections";
+import { Reaction } from "/server/api";
 
 export default () => {
   const RestApi = new Restivus({
@@ -10,18 +11,21 @@ export default () => {
   });
 
   const configRoutes = (collection, isPrivate) => {
-    const roleRequired = ["admin", "owner"];
-    let getAllRoleRequired;
-    let getRoleRequired;
-    if (isPrivate) {
-      getAllRoleRequired = "admin";
-      getRoleRequired = roleRequired;
-    }
+    const requiredRoles = ["admin", "owner"];
     return {
       endpoints: {
         getAll: {
-          roleRequired: getAllRoleRequired,
+          authRequired: isPrivate,
           action() {
+            if (isPrivate) {
+              if (!Reaction.hasPermission("admin", this.user._id)) {
+                return {
+                  statusCode: 403,
+                  status: "error",
+                  message: "You do not have permission to perform this action"
+                };
+              }
+            }
             const records = collection.find().fetch();
             if (records) {
               return {
@@ -40,6 +44,15 @@ export default () => {
         post: {
           authRequired: true,
           action() {
+            try {
+              collection.schema.validate(this.bodyParams);
+            } catch (err) {
+              return {
+                statusCode: 400,
+                status: "error",
+                message: "Invalid format"
+              };
+            }
             const isInserted = collection.insert(this.bodyParams);
             if (isInserted) {
               return {
@@ -56,8 +69,17 @@ export default () => {
           }
         },
         get: {
-          roleRequired: getRoleRequired,
+          authRequired: isPrivate,
           action() {
+            if (isPrivate) {
+              if (!Reaction.hasPermission(requiredRoles, this.user._id)) {
+                return {
+                  statusCode: 403,
+                  status: "error",
+                  message: "You do not have permission to perform this action"
+                };
+              }
+            }
             const record = collection.findOne({ _id: this.urlParams.id });
             if (record) {
               return {
@@ -74,8 +96,24 @@ export default () => {
           }
         },
         put: {
-          roleRequired,
+          authRequired: true,
           action() {
+            if (!Reaction.hasPermission(requiredRoles, this.user._id)) {
+              return {
+                statusCode: 403,
+                status: "error",
+                message: "You do not have permission to perform this action"
+              };
+            }
+            try {
+              collection.schema.validate(this.bodyParams);
+            } catch (err) {
+              return {
+                statusCode: 400,
+                status: "error",
+                message: "Invalid format"
+              };
+            }
             const isUpdated = collection.update(this.urlParams.id, this.bodyParams);
             if (isUpdated) {
               return {
@@ -94,8 +132,15 @@ export default () => {
           }
         },
         patch: {
-          roleRequired,
+          authRequired: true,
           action() {
+            if (!Reaction.hasPermission(requiredRoles, this.user._id)) {
+              return {
+                statusCode: 403,
+                status: "error",
+                message: "You do not have permission to perform this action"
+              };
+            }
             const isUpdated = collection.update(this.urlParams.id, {
               $set: this.bodyParams
             });
@@ -116,8 +161,15 @@ export default () => {
           }
         },
         delete: {
-          roleRequired,
+          authRequired: true,
           action() {
+            if (!Reaction.hasPermission(requiredRoles, this.user._id)) {
+              return {
+                statusCode: 403,
+                status: "error",
+                message: "You do not have permission to perform this action"
+              };
+            }
             const isDeleted = collection.remove(this.urlParams.id);
             if (isDeleted) {
               return {
