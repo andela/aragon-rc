@@ -12,7 +12,7 @@ Template.searchInput.helpers({
           collection: ProductSearch,
           field: "title",
           options: "i",
-          matchAll: false,
+          matchAll: true,
           template: Template.resultPill,
           noMatchTemplate: Template.noResult
         }
