@@ -3,6 +3,7 @@ import i18n from "./i18n";
 import Load from "./load-data";
 import Packages from "./packages";
 import Registry from "./registry";
+import RestApi from "./rest-api";
 import Init from "./init";
 import Prerender from "./prerender";
 import { initTemplates } from "/server/api/core/templates";
@@ -15,6 +16,7 @@ export default function () {
   Load();
   Packages();
   Registry();
+  RestApi();
   Init();
   Prerender();
 }
