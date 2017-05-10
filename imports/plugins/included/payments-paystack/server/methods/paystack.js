@@ -31,26 +31,6 @@ const ValidCVV = Match.Where(function (x) {
   return /^[0-9]{3,4}$/.test(x);
 });
 
-// function chargeObj() {
-//   return {
-//     amount: "",
-//     currency: "",
-//     card: {},
-//     capture: true
-//   };
-// }
-
-// function parseCardData(data) {
-//   return {
-//     number: data.number,
-//     name: data.name,
-//     cvc: data.cvv2,
-//     expireMonth: data.expire_month,
-//     expireYear: data.expire_year
-//   };
-// }
-
-
 Meteor.methods({
   /**
    * Submit a card for Authorization
