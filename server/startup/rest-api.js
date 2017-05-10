@@ -30,7 +30,6 @@ export default () => {
 
   const configPrivate = (collection) => {
     return {
-      path: collection._name.toLowercase(),
       routeOptions: {
         authRequired: true
       },
@@ -153,7 +152,6 @@ export default () => {
 
   const configPublic = (collection, isShop = false) => {
     return {
-      path: collection._name.toLowercase(),
       routeOptions: {
         authRequired: true
       },
