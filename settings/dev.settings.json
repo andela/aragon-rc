@@ -3,7 +3,7 @@
   "MAIL_URL": "",
   "reaction": {
     "REACTION_USER": "admin",
-    "REACTION_AUTH": "pass",
+    "REACTION_AUTH": "password",
     "REACTION_EMAIL": "admin@aragon-rc.com"
   },
   "REACTION_LOG_LEVEL": "info",
