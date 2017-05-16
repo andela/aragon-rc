@@ -99,7 +99,6 @@ Template.searchModal.onCreated(function () {
         } else {
           Session.set("displaySortandFilter", false);
         }
-        // }
 
         if (sortBy !== "relevance") {
           productResults = sortProductsOnPrice(productResults, sortBy);
