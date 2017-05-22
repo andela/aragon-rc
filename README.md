@@ -4,6 +4,8 @@
 
 Reaction is an event-driven, real-time reactive commerce platform built with JavaScript (ES6). It plays nicely with npm and Docker, and is based entirely on JavaScript, CSS, and HTML. 
 
+View app here: [Aragon Reaction Commerce](https://aragon-rc-staging.herokuapp.com/)
+
 ![Reaction v.1.0.0](https://raw.githubusercontent.com/reactioncommerce/reaction-docs/master/assets/rc-desktop.png)
 
 ## Features
