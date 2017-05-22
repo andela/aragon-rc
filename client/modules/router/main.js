@@ -183,6 +183,15 @@ Router.initPackageRoutes = () => {
         ReactionLayout(Session.get("INDEX_OPTIONS") || {});
       }
     });
+    // Shop route
+    shop.route("/shop/:shopId", {
+      action(params) {
+        ReactionLayout({
+          template: "shopView",
+          data: params.shopId
+        });
+      }
+    });
 
     // get package registry route configurations
     for (const pkg of pkgs) {
