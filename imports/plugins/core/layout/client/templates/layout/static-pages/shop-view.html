@@ -1,0 +1,22 @@
+<template name="shopView">
+  <nav class="navbar navbar-inverse static-page-nav">
+    <div class="container">
+     <ul class="nav navbar-nav">
+        {{#each loadPages}}
+        <li><a href="#{{slug}}" data-event-action="{{slug}}">{{pageTitle}}</a></li>
+       {{/each}}
+     </ul>
+   </div>
+  </nav>
+ {{#each loadPages}}
+ <div class="row page-holder">
+   {{> page}}
+ </div>
+  {{/each}}
+</template>
+
+<template name="page">
+  <div class="col-sm-12" id="{{slug}}">
+  {{{content}}}
+ </div>
+</template> 
