@@ -1,6 +1,6 @@
-import { Meteor } from "meteor/meteor";
-import { check } from "meteor/check";
-import { Reaction } from "/server/api";
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+import { Reaction } from '/server/api';
 
 import { StaticPages } from "/lib/collections";
 import * as Schemas from "/lib/collections/schemas";
