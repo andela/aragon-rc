@@ -250,6 +250,11 @@
       "resolved": "https://registry.npmjs.org/async-each/-/async-each-1.0.1.tgz",
       "optional": true
     },
+    "intro.js": {
+      "version": "2.5.0",
+      "from": "intro.js@>=1.0.0 <2.5.0",
+      "resolved": "https://registry.npmjs.org/intro.js/-/intro.js-2.5.0.tgz"
+    },
     "asynckit": {
       "version": "0.4.0",
       "from": "asynckit@>=0.4.0 <0.5.0",
