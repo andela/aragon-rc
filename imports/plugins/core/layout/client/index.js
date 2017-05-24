@@ -14,6 +14,8 @@ import "./templates/layout/header/header.js";
 import "./templates/layout/header/tags.html";
 import "./templates/layout/notFound/notFound.html";
 import "./templates/layout/notFound/notFound.js";
+import "./templates/layout/static-pages/shop-view.html";
+import "./templates/layout/static-pages/shop-view.js";
 import "./templates/layout/notice/unauthorized.html";
 import "./templates/layout/notice/unauthorized.js";
 import "./templates/layout/layout.html";

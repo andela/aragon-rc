@@ -1,0 +1,100 @@
+<template name="staticPageLayout">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-8 col-xs-12 create-page">
+         <div class="row heading">
+           <div class="col-md-8"><h2>Create a new page</h2></div>
+           <div class="col-md-4">
+             <span class="reset" data-event-action="formReset"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Reset Form</span>
+           </div>
+         </div>
+         <div class="row form-area">
+           <form>
+             <div class="form-group">
+               <div class="input-group">
+                <label>Title <strong>*</strong> </label>
+                <span id="titleErr" class="error-span"></span>
+                <input type="text" id="title" class="form-control tbox" placeholder="Page title">
+                <small class="form-text text-muted">This is your page title</small>
+               </div>
+             </div>
+             <label>Slug(url) <strong>*</strong></label>
+             <span id="slugErr" class="error-span"></span>
+             <div class="input-group">
+               <span class="input-group-addon">{{ getUrl }}/pages/</span>
+               <input type="text" id="slug" class="form-control tbox-2" placeholder="Slug">
+             </div><br>
+             <div class="input-group">
+               <label>Page Content</label>
+               <span id="contentErr" class="error-span"></span>
+               <textarea name="contentEditor" id="contentEditor" class="content-editor">
+                 <h2>Page header</h2><hr>
+                 <p>Page content</p>
+               </textarea>
+             </div>
+             <div>
+               <div class="form-group-submit">
+                 <label for="publish">
+                   <span><input type="checkbox" name="" id="publish" class="publish-page" value="publish">Save and Publish page.</span>
+                 </label>
+               </div>
+               <div>
+                 <button type="submit" class="btn submit-btn" id="submitBtn" data-event-action="createPage">Save</button>
+               </div>
+             </div>
+           </form>
+         </div>
+       </div>
+
+       <!--{{#if hasPages}}-->
+       <div class="col-md-4 col-xs-12 manage-pages">
+         <div class="row heading">
+           <div class="col-md-6"><h3>My Pages</h3></div>
+           <div class="col-md-3 drafts">
+             <div>Drafts</div>
+             <div>{{fileStats.drafts}}</div>
+           </div>
+           <div class="col-md-3 published">
+             <div>Published</div>
+             <div>{{fileStats.published}}</div>
+           </div>
+         </div>
+
+         <div class="row table-display">
+           <table class="table table-hover">
+             <thead>
+               <tr>
+                 <th>Page</th>
+                 <th class="center">Publish</th>
+                 <th class="center">Edit</th>
+                 <th class="center">Delete</th>
+               </tr>
+             </thead>
+             <tbody>
+             {{#each getAllPages }}
+               {{> pageRow}}
+             {{else}}
+                No pages yet
+             {{/each}}
+             </tbody>
+           </table>
+         </div>
+       </div>
+       <!--{{/if}}-->
+     </div>
+   </div>
+</template>
+
+<template name="pageRow">
+   <tr>
+     <td>{{ pageTitle }}</td>
+     <td class="center">
+       <label class="switch">
+         <input type="checkbox" checked="{{inputSliderChecked status}}" data-event-action="togglePublish">
+         <div class="slider round"></div>
+       </label>
+     </td>
+     <td class="center"><i class="fa fa-pencil edit" data-event-action="edit"></i></td>
+     <td class="center"><i class="fa fa-trash delete" data-event-action="delete"></i></td>
+   </tr>
+</template>

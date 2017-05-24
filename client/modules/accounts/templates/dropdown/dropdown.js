@@ -4,6 +4,13 @@ import { Session } from "meteor/session";
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
 
+
+Template.loginDropdown.helpers({
+  slug() {
+    return `/shop/${Reaction.getShopId()}`;
+  }
+});
+
 Template.loginDropdown.events({
 
   /**
@@ -70,6 +77,13 @@ Template.loginDropdown.events({
       Reaction.Router.go(route);
     }
     template.$(".dropdown-toggle").dropdown("toggle");
+  },
+  "click [data-event-action=manage-pages]": () => {
+    Reaction.Router.go("/reaction/dashboard/static-pages");
+  },
+  "click [data-event-action=visit-pages]": (event, template) => {
+    event.preventDefault();
+    Reaction.Router.go(`/shop/${Reaction.getShopId()}`);
   }
 });
 
