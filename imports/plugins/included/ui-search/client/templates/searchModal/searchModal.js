@@ -56,6 +56,18 @@ Template.searchModal.onCreated(function () {
     });
   }
 
+  function sortProductsOnAge(products, sortBy) {
+    const sortedProducts = products.sort((firstProduct, nextProduct) => {
+      return firstProduct.createdAt - nextProduct.createdAt;
+    });
+
+    if (sortBy === "oldest") {
+      return sortedProducts;
+    } else if (sortBy === "newest") {
+      return sortedProducts.reverse();
+    }
+  }
+
   function filterByPrice(products, limits)  {
     // for 1000 and above, one item sits in the limits array
     if (!limits[1]) {
@@ -93,6 +105,7 @@ Template.searchModal.onCreated(function () {
       if (searchCollection === "products") {
         let productResults = ProductSearch.find().fetch();
 
+        console.log(productResults);
         // Only display sort and filter options if there are search results and a search query
         if (productResults.length > 0 && searchQuery.length > 0) {
           Session.set("displaySortandFilter", true);
@@ -101,7 +114,11 @@ Template.searchModal.onCreated(function () {
         }
 
         if (sortBy !== "relevance") {
-          productResults = sortProductsOnPrice(productResults, sortBy);
+          if (sortBy === "lowest" ||  sortBy === "highest") {
+            productResults = sortProductsOnPrice(productResults, sortBy);
+          } else if (sortBy === "newest" ||  sortBy === "oldest") {
+            productResults = sortProductsOnAge(productResults, sortBy);
+          }
         }
 
         const vendors = productResults.map((product) => {
