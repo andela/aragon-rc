@@ -49,6 +49,7 @@ getResults.products = function (searchTerm, facets, maxResults, userId) {
         handle: 1,
         price: 1,
         vendor: 1,
+        brand: 1,
         isSoldOut: 1,
         createdAt: 1,
         isLowQuantity: 1,
