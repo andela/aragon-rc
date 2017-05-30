@@ -56,6 +56,11 @@ export const SearchPackageConfig = new SimpleSchema([
       label: "Include vendor",
       defaultValue: true
     },
+    "settings.products.includes.brand": {
+      type: Boolean,
+      label: "Include brand",
+      defaultValue: true
+    },
     "settings.products.weights.vendor": {
       type: Number,
       label: "Vendor weight",

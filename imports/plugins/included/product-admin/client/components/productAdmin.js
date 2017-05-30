@@ -21,6 +21,7 @@ const fieldNames = [
   "handle",
   "subtitle",
   "vendor",
+  "brand",
   "description",
   "origincountry",
   "facebookMsg",
@@ -34,6 +35,7 @@ const fieldGroups = {
   handle: { group: "productDetails" },
   pageTitle: { group: "productDetails" },
   vendor: { group: "productDetails" },
+  brand: { group: "productDetails" },
   description: { group: "productDetails" },
   facebookMsg: { group: "social" },
   twitterMsg: { group: "social" },
@@ -294,6 +296,18 @@ class ProductAdmin extends Component {
               placeholder="Vendor"
               ref="vendorInput"
               value={this.product.vendor}
+            />
+            <TextField
+              i18nKeyLabel="productDetailEdit.brand"
+              i18nKeyPlaceholder="productDetailEdit.brand"
+              label="Brand"
+              name="brand"
+              onBlur={this.handleFieldBlur}
+              onChange={this.handleFieldChange}
+              onReturnKeyDown={this.handleFieldBlur}
+              placeholder="Vendor"
+              ref="brandInput"
+              value={this.product.brand}
             />
             <TextField
               i18nKeyLabel="productDetailEdit.description"

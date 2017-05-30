@@ -56,6 +56,18 @@ Template.searchModal.onCreated(function () {
     });
   }
 
+  function sortProductsOnAge(products, sortBy) {
+    const sortedProducts = products.sort((firstProduct, nextProduct) => {
+      return firstProduct.createdAt - nextProduct.createdAt;
+    });
+
+    if (sortBy === "oldest") {
+      return sortedProducts;
+    } else if (sortBy === "newest") {
+      return sortedProducts.reverse();
+    }
+  }
+
   function filterByPrice(products, limits)  {
     // for 1000 and above, one item sits in the limits array
     if (!limits[1]) {
@@ -84,6 +96,7 @@ Template.searchModal.onCreated(function () {
     const sub = this.subscribe("SearchResults", searchCollection, searchQuery, facets);
     const sortBy = Session.get("sortBy");
     const vendorChoice = Session.get("vendorChoice");
+    const brandChoice = Session.get("brandChoice");
     const priceFilter = Session.get("priceFilter");
 
     if (sub.ready()) {
@@ -101,11 +114,20 @@ Template.searchModal.onCreated(function () {
         }
 
         if (sortBy !== "relevance") {
-          productResults = sortProductsOnPrice(productResults, sortBy);
+          if (sortBy === "lowest" ||  sortBy === "highest") {
+            productResults = sortProductsOnPrice(productResults, sortBy);
+          } else if (sortBy === "newest" ||  sortBy === "oldest") {
+            productResults = sortProductsOnAge(productResults, sortBy);
+          }
         }
 
-        const vendors = productResults.map((product) => {
+        // get all vendors for products in search result
+        let vendors = productResults.map((product) => {
           return product.vendor;
+        });
+        // if vendor is null, remove it
+        vendors = vendors.filter((vendor) => {
+          return vendor;
         });
         const productVendors = [...new Set(vendors)];
         Session.set("vendors", productVendors);
@@ -113,6 +135,26 @@ Template.searchModal.onCreated(function () {
         if (vendorChoice !== "allVendors") {
           productResults = productResults.filter((product) => {
             return product.vendor === vendorChoice;
+          });
+        }
+
+        // get all brands for products in search result
+        let brands = productResults.map((product) => {
+          if (product.brand) {
+            return product.brand;
+          }
+        });
+
+        // if brand is null, remove it
+        brands = brands.filter((brand) => {
+          return brand;
+        });
+        const productBrands = [...new Set(brands)];
+        Session.set("brands", productBrands);
+
+        if (brandChoice !== "allBrands") {
+          productResults = productResults.filter((product) => {
+            return product.brand === brandChoice;
           });
         }
 
@@ -190,6 +232,11 @@ Template.searchModal.helpers({
   getProductVendors() {
     return Session.get("vendors");
   },
+
+  getProductBrands() {
+    return Session.get("brands");
+  },
+
   displaySortandFilter() {
     return Session.get("displaySortandFilter");
   },
@@ -233,10 +280,16 @@ Template.searchModal.events({
     event.preventDefault();
     // initialize vendorChoice to allVendors
     Session.set("vendorChoice", "allVendors");
+
+    // initialize brandChoice to allBrands
+    Session.set("brandChoice", "allBrands");
+
     // initialize sortBy to relevance
     Session.set("sortBy", "relevance");
+
     // initialize priceFilter to all
     Session.set("priceFilter", "all");
+
     const searchQuery = templateInstance.find("#search-input").value;
     templateInstance.state.set("searchQuery", searchQuery);
     $(".search-modal-header:not(.active-search)").addClass(".active-search");
@@ -261,6 +314,12 @@ Template.searchModal.events({
     event.preventDefault();
     // if user selects a vendor, set vendorChoice to that choice
     Session.set("vendorChoice", event.target.value);
+  },
+
+  "change #brand-choice"(event) {
+    event.preventDefault();
+    // if user selects a brand, set brandChoice to that choice
+    Session.set("brandChoice", event.target.value);
   },
 
   "change #price-filter"(event) {
