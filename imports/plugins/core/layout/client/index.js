@@ -19,6 +19,8 @@ import "./templates/layout/static-pages/shop-view.js";
 import "./templates/layout/notice/unauthorized.html";
 import "./templates/layout/notice/unauthorized.js";
 import "./templates/layout/layout.html";
+import "./templates/layout/wallet/wallet.html";
+import "./templates/layout/wallet/wallet.js";
 
 import "./templates/theme/theme.html";
 import "./templates/theme/theme.js";
