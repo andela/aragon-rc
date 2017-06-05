@@ -11,9 +11,9 @@
       <div class="search">{{> React IconButtonComponent}}</div>
     {{/if}}
     {{#if hasPermission 'account/profile'}}
-      <div>{{> React notificationButtonComponent }}</div>
+      <div class="hidden-xs">{{> React notificationButtonComponent }}</div>
     {{/if}}
-    <div class="tour">{{> React TourButtonComponent}}</div>
+    <div class="tour hidden-xs">{{> React TourButtonComponent}}</div>
     <div class="languages hidden-xs">{{> i18nChooser}}</div>
     <div class="currencies hidden-xs">{{> currencySelect}}</div>
     <div id="accounts" class="accounts">{{> accounts tpl="loginDropdown"}}</div>

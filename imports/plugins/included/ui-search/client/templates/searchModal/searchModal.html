@@ -1,53 +1,55 @@
 <template name="searchModal">
-  <div class="rui search-modal js-search-modal">
+  <div class="row rui search-modal js-search-modal" style="background-color: #fafafa;">
     <div class="rui search-modal-close">{{> React IconButtonComponent}}</div>
 
     {{#if displaySortandFilter}}
 
-    <span class="filter-sort" id="vendor-choice-span">
-      Filter by vendor:
-      <select id="vendor-choice" class="filter-sort-select">
-        <option value="allVendors"> All Vendors </option>
-      {{#each vendor in getProductVendors}}
-        <option value={{vendor}}>{{vendor}}</option>
-      {{/each}}
-    </select>
-  </span>
+    <div class="container">
+      <span class="col-sm-6 col-md-3 filter-sort">
+        <label for="vendor-choice">Filter by vendor:</label>
+        <select name="vendor-choice" id="vendor-choice" class="form-control filter-sort-select">
+          <option value="allVendors"> All Vendors </option>
+        {{#each vendor in getProductVendors}}
+          <option value={{vendor}}>{{vendor}}</option>
+        {{/each}}
+        </select>
+      </span>
 
-  <span class="filter-sort" id="brand-choice-span">
-    Filter by brand:
-    <select id="brand-choice" class="filter-sort-select">
-      <option value="allBrands"> All Brands </option>
-    {{#each brand in getProductBrands}}
-      <option value={{brand}}>{{brand}}</option>
-    {{/each}}
-  </select>
-</span>
+      <span class="col-sm-6 col-md-3 filter-sort">
+        <label for="brand-choice">Filter by brand:</label>
+        <select name="brand-choice" id="brand-choice" class="form-control filter-sort-select">
+          <option value="allBrands"> All Brands </option>
+        {{#each brand in getProductBrands}}
+          <option value={{brand}}>{{brand}}</option>
+        {{/each}}
+        </select>
+      </span>
 
-  <span class="filter-sort" id="price-filter-span">
-    Filter by price:
-    <select id="price-filter" class="filter-sort-select">
-      <option value="all" selected>All</option>
-      <option value="0-50">below $50</option>
-      <option value="50-100">$50 - $100</option>
-      <option value="100-500">$100 - $500</option>
-      <option value="500-1000">$500 - $1000</option>
-      <option value="1000">$1000 - above</option>
-  </select>
-</span>
+      <span class="col-sm-6 col-md-3 filter-sort">
+        <label for="price-filter">Filter by price:</label>
+        <select name="price-filter" id="price-filter" class="form-control filter-sort-select">
+          <option value="all" selected>All</option>
+          <option value="0-50">below $50</option>
+          <option value="50-100">$50 - $100</option>
+          <option value="100-500">$100 - $500</option>
+          <option value="500-1000">$500 - $1000</option>
+          <option value="1000">$1000 - above</option>
+        </select>
+      </span>
 
-  <span class="filter-sort" id="sort-choice-span">
-    Sort by:
-    <select id="sort-choice" class="filter-sort-select">
-      <option value="relevance">Relevance</option>
-      <option value="lowest">Price: Lowest to Highest</option>
-      <option value="highest">Price: Highest to Lowest</option>
-      <option value="newest">Age: Newest to Oldest</option>
-      <option value="oldest">Age: Oldest to Newest</option>
-    </select>
-  </span>
+      <span class="col-sm-6 col-md-3 filter-sort">
+        <label for="sort-choice">Sort by:</label>
+        <select name="sort-choice" id="sort-choice" class="form-control filter-sort-select">
+          <option value="relevance">Relevance</option>
+          <option value="lowest">Price: Lowest to Highest</option>
+          <option value="highest">Price: Highest to Lowest</option>
+          <option value="newest">Age: Newest to Oldest</option>
+          <option value="oldest">Age: Oldest to Newest</option>
+        </select>
+      </span>
+    </div>
 
-  {{/if}}
+    {{/if}}
 
     <div class="rui search-modal-header">
       {{> searchInput }}
