@@ -36,6 +36,7 @@
     {{> userAccountsDropdown}}
       {{#if currentUser}}
       {{> visitPages}}
+      {{> wallet}}
    {{/if}}
    {{#if hasAdminAccess}}
      {{> pages}}
@@ -54,27 +55,39 @@
   </ul>
 </template>
 
+<template name="wallet">
+  <li class="dropdown-apps-icon">
+    <a data-event-action="my-wallet">
+      <i class="fa fa-money"></i>
+      <span class="icon-text">
+        My Wallet
+      </span>
+    </a>
+  </li>
+</template>
+
 <template name="pages">
-    <li class="dropdown-apps-icon">
-     <a data-event-action="manage-pages">
-       <i class="fa fa-copy"></i>
-       <span class="icon-text">
-         Manage Pages
-       </span>
-     </a>
-    </li>
-  </template>
+  <li class="dropdown-apps-icon">
+    <a data-event-action="manage-pages">
+      <i class="fa fa-copy"></i>
+      <span class="icon-text">
+        Manage Pages
+      </span>
+    </a>
+  </li>
+</template>
  
-  <template name="visitPages">
-    <li class="dropdown-apps-icon">
-     <a data-event-action="visit-pages" href={{slug}} class="visit-pages">
-       <i class="fa fa-file-powerpoint-o"></i>
-       <span class="icon-text">
-         Visit Pages
-       </span>
-     </a>
-    </li>
-  </template>
+<template name="visitPages">
+  <li class="dropdown-apps-icon">
+    <a data-event-action="visit-pages" href={{slug}} class="visit-pages">
+      <i class="fa fa-file-powerpoint-o"></i>
+      <span class="icon-text">
+        Visit Pages
+      </span>
+    </a>
+  </li>
+</template>
+
 <template name="userAccountsDropdown">
   <!--user account shortcut icons -->
   {{#each reactionApps provides="userAccountDropdown" enabled=true}}
