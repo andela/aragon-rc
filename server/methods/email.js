@@ -81,7 +81,7 @@ Meteor.methods({
 
 
   /**
-   * Retry a failed or cancelled email job
+   * Retry a failed or canceled email job
    * @param {String} jobId - a sendEmail job ID
    * @return {Boolean} - returns true if job is successfully restarted
    */
