@@ -2,7 +2,7 @@ import { i18next } from "/client/api";
 
 export default {
   /**
-   * Restart a failed or cancelled email job
+   * Restart a failed or canceled email job
    * @param {Object} email - the email job object
    * @return {null} triggers an alert
    */

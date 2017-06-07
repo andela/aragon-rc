@@ -193,6 +193,11 @@ Router.initPackageRoutes = () => {
       }
     });
 
+    // wallet route
+    Router.route("/dashboard/my-wallet", {
+      template: "walletLayout"
+    });
+
     // get package registry route configurations
     for (const pkg of pkgs) {
       const newRoutes = [];

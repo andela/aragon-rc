@@ -84,6 +84,9 @@ Template.loginDropdown.events({
   "click [data-event-action=visit-pages]": (event, template) => {
     event.preventDefault();
     Reaction.Router.go(`/shop/${Reaction.getShopId()}`);
+  },
+  "click [data-event-action=my-wallet]": () => {
+    Reaction.Router.go("/reaction/dashboard/my-wallet");
   }
 });
 

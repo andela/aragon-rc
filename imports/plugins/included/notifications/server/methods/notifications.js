@@ -18,6 +18,7 @@ Meteor.methods({
   * @return {Object} returns result
   */
   "notification/send": function (userId, type, url, sms, details) {
+    // console.log('funky', details);
     check(userId, String);
     check(type, String);
     check(sms, Boolean);
@@ -26,7 +27,7 @@ Meteor.methods({
 
     const values = {};
     const types = {
-      orderCancelled: "Your order was canceled.",
+      orderCanceled: "Your order was canceled.",
       newOrder: "Your order is being processed.",
       forAdmin: "You have a new order.",
       orderDelivered: "Your order has been delivered.",
