@@ -19,13 +19,5 @@ Reaction.registerPackage({
     priority: 1,
     container: "core",
     template: "actionableAnalytics"
-  }, {
-    route: "/dashboard/actionable_analytics",
-    name: "dashboard/actionable_analytics",
-    provides: "shortcut",
-    label: "Actionable Analytics",
-    description: "View Actionable Analytics For Your Shop",
-    icon: "fa fa-bar-chart",
-    priority: 1
   }]
 });
